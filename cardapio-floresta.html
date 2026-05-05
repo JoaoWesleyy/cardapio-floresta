@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floresta Restaurante — Cardápio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-escuro: #1a3d2b;
+      --verde-medio: #2d5a3d;
+      --verde-claro: #4a7c5a;
+      --dourado: #c9a84c;
+      --dourado-claro: #e8c875;
+      --creme: #faf6f0;
+      --bege: #f0e8d8;
+      --texto: #2c1810;
+      --branco: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #ffffca;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: var(--verde-escuro);
+      text-align: center;
+      padding: 10px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 40px,
+          rgba(201, 168, 76, .06) 40px, rgba(201, 168, 76, .06) 41px);
+    }
+
+    .logo-floresta {
+      width: 380px;
+    }
+
+    .header-linha {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 0px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .header-linha::before,
+    .header-linha::after {
+      content: '';
+      flex: 1;
+      max-width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--dourado));
+    }
+
+    .header-linha::after {
+      background: linear-gradient(to left, transparent, var(--dourado));
+    }
+
+    .header-diamond {
+      color: var(--dourado);
+      font-size: 10px;
+    }
+
+    /* ── TAXA ── */
+    .taxa-bar {
+      background: var(--dourado);
+      text-align: center;
+      padding: 8px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--verde-escuro);
+      text-transform: uppercase;
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── SEÇÃO TÍTULO ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-header::before,
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--verde-escuro);
+    }
+
+    .section-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: var(--verde-escuro);
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding: 6px 16px;
+      border: 1px solid var(--verde-escuro);
+    }
+
+    /* ── GRELHA DE CARDS ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--verde-escuro);
+      border: 2px solid var(--verde-escuro);
+      margin-bottom: 60px;
+    }
+
+    .item-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      height: 290px;
+      background: var(--branco);
+      padding: 22px 24px;
+      transition: background .2s;
+    }
+
+    .item-card:hover {
+      background: var(--bege);
+    }
+
+    .itens-img {
+      grid-column: 2 / 2;
+      place-self: center;
+      width: 150px;
+      border-radius: 4px;
+    }
+
+    .item-header {
+      display: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .item-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--verde-escuro);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      flex: 1;
+    }
+
+    .item-preco {
+      display: block;
+      grid-row: 2;
+      margin: 5px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dourado);
+      white-space: nowrap;
+    }
+
+    .item-preco::before {
+      content: 'R$ ';
+      font-size: 10px;
+    }
+
+    .item-desc {
+      grid-column: 1 / 2;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      color: #5a4a3a;
+      font-style: italic;
+    }
+
+    .item-extras {
+      display: flex;
+      flex-wrap: wrap;
+      grid-column: 1 / -1;
+      justify-content: center;
+      margin-top: 13px;
+      gap: 6px;
+    }
+
+    .extra-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 17px;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      background: var(--bege);
+      border: 1px solid var(--verde-claro);
+      color: var(--verde-escuro);
+    }
+
+    /* ── ESPECIALIDADE NA GRELHA ── */
+    .grelha-box {
+      background: var(--verde-escuro);
+      padding: 36px;
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grelha-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+    }
+
+    .grelha-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .grelha-header::before,
+    .grelha-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(201, 168, 76, .4);
+    }
+
+    .grelha-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: var(--dourado);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .grelha-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    .grelha-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      transition: background .2s;
+    }
+
+    .grelha-item:hover {
+      background: rgba(255, 255, 255, .05);
+    }
+
+    .grelha-item-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--branco);
+    }
+
+    .grelha-item-preco {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dourado);
+    }
+
+    .grelha-item-preco::before {
+      content: 'R$ ';
+      font-size: 10px;
+    }
+
+    .grelha-nota {
+      margin-top: 20px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-align: center;
+      color: rgba(201, 168, 76, .6);
+      text-transform: uppercase;
+    }
+
+    /* ── ACOMPANHAMENTOS ── */
+    .acomp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--verde-claro);
+      border: 1px solid var(--verde-claro);
+      margin-bottom: 12px;
+    }
+
+    .acomp-item {
+      background: var(--branco);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      transition: background .2s;
+    }
+
+    .acomp-item:hover {
+      background: var(--bege);
+    }
+
+    .acomp-nome {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--texto);
+    }
+
+    .acomp-preco {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--verde-medio);
+    }
+
+    .acomp-preco::before {
+      content: 'R$ ';
+      font-size: 9px;
+    }
+
+    .acomp-nota {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 15px;
+      letter-spacing: 2px;
+      color: var(--verde-claro);
+      text-align: center;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+      padding: 10px;
+      border: 1px solid var(--verde-claro);
+      border-top: none;
+    }
+
+    /* ── PRATO KIDS ── */
+    .kids-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      background: var(--verde-escuro);
+      border: 2px solid var(--verde-escuro);
+      margin-bottom: 60px;
+    }
+
+    .kids-item {
+      flex: 1;
+      min-width: 240px;
+      background: var(--branco);
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: background .2s;
+    }
+
+    .kids-item:hover {
+      background: var(--bege);
+    }
+
+    .kids-nome {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--texto);
+    }
+
+    .kids-preco {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dourado);
+      white-space: nowrap;
+    }
+
+    .kids-preco::before {
+      content: 'R$ ';
+      font-size: 10px;
+    }
+
+    /* ── SOBREMESAS TABLE ── */
+    .sobremesas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--verde-claro);
+      border: 2px solid var(--verde-claro);
+      margin-bottom: 60px;
+    }
+
+    .sobremesa-item {
+      background: var(--branco);
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background .2s;
+    }
+
+    .sobremesa-item:hover {
+      background: var(--bege);
+    }
+
+    .sobremesa-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .sobremesa-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--verde-escuro);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sobremesa-preco {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dourado);
+    }
+
+    .sobremesa-preco::before {
+      content: 'R$ ';
+      font-size: 10px;
+    }
+
+    /* ── BOLINHOS ── */
+    .bolinhos-wrapper {
+      background: var(--verde-escuro);
+      padding: 36px;
+      margin-bottom: 60px;
+    }
+
+    .bolinhos-title-block {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .bolinhos-nome {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 36px;
+      color: var(--branco);
+    }
+
+    .bolinhos-qtd {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--dourado);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .bolinhos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .bolinho-item {
+      background: rgba(255, 255, 255, .04);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: background .2s;
+    }
+
+    .bolinho-item:hover {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    .bolinho-nome {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--branco);
+    }
+
+    .bolinho-tipo {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--dourado);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .bolinho-preco {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dourado);
+      white-space: nowrap;
+    }
+
+    .bolinho-preco::before {
+      content: 'R$ ';
+      font-size: 10px;
+    }
+
+    .bolinho-destaque {
+      background: rgba(201, 168, 76, .12) !important;
+    }
+
+    /* ── SEÇÃO WRAPPER ── */
+    .section-block {
+      margin-bottom: 60px;
+    }
+
+    /* ── HAMBURGUER ESPECIAL ── */
+    .hamburguer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+      background: var(--verde-escuro);
+      border: 2px solid var(--verde-escuro);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--verde-escuro);
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      letter-spacing: 6px;
+      color: var(--branco);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .footer-taxa {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--dourado);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 600px) {
+      .grelha-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sobremesas-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grelha-box {
+        padding: 24px 16px;
+      }
+
+      .bolinhos-wrapper {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img class="logo-floresta" src="logo-floresta.png" alt="">
+    <div class="header-linha"><span class="header-diamond">◆</span></div>
+  </div>
+  <div class="taxa-bar">Cobramos couvert artistico</div>
+
+  <div class="container">
+
+    <!-- ENTRADAS E PORÇÕES -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">Entradas e Porções</span>
+      </div>
+      <div class="items-grid">
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Mini Almôndegas</span>
+            <span class="item-preco">48</span>
+            <p class="item-desc">Recheadas com queijo. Servida na panelinha com molho rústico de tomate e torradas de pão brioche.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Steak Tartare</span>
+            <span class="item-preco">52</span>
+            <p class="item-desc">Carne bovina fresca na ponta da faca, temperada com alcaparras, cebola, mostarda Dijon e especiarias. Servida com torradas e gema curada..</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Carpaccio</span>
+            <span class="item-preco">55</span>
+            <p class="item-desc">Lâminas de carne bovina crua servidas com lascas de queijo parmesão, azeite extra virgem, alcaparras e rúcula. Acompanha torradas.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Trio de Linguiças</span>
+            <span class="item-preco">48</span>
+            <p class="item-desc">Linguiça artesanal de frango com pequi • Pernil com bacon • Cupim de sol com pimenta biquinho. Acompanha mostarda dijon, amarela e preta.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Bruschetta (de Pulled Pork)</span>
+            <span class="item-preco">28</span>
+            <p class="item-desc">Carne de porco cozida lentamente no defumador, temperada com dry rub, salsa, manga, bacon, servida com molho barbecue.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Queijo 4 Cachoeiras</span>
+            <span class="item-preco">35</span>
+            <p class="item-desc">Servido com geleia de morango.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Joelho de Porco Defumado</span>
+            <span class="item-preco">48</span>
+            <p class="item-desc">Porção de joelho de porco defumado, assado e frito, servido com salada de repolho.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Trio de Burgers Canapé</span>
+            <span class="item-preco">38</span>
+            <p class="item-desc">Torrada, mini hambúrguer com queijo cheddar / torrada, mini hambúrguer com queijo gorgonzola / torrada, mini hambúrguer com cebola caramelizada e bacon.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Rosbife Defumado</span>
+            <span class="item-preco">55</span>
+            <p class="item-desc">Finas fatias de rosbife defumado artesanalmente, acompanhado de coalhada seca, rúcula e torradas.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Pão de Alho</span>
+            <span class="item-preco">25</span>
+            <p class="item-desc">Assado, servido com geleia de bacon e coração de frango.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Filé Acebolado</span>
+            <span class="item-preco">115</span>
+            <p class="item-desc">Cubos de filé mignon acebolados fritos na chapa.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Isca de Peixe</span>
+            <span class="item-preco">90</span>
+            <p class="item-desc">Cubos de filé de dourado empanados e fritos.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Extras</span>
+          </div>
+          <div class="item-extras">
+            <span class="extra-tag">+ Batata Frita R$ 15</span>
+            <span class="extra-tag">+ Cheddar R$ 15</span>
+            <span class="extra-tag">+ Bacon R$ 15</span>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ESPECIALIDADE NA GRELHA -->
+    <div class="grelha-box">
+      <div class="grelha-header">
+        <span class="grelha-title">Especialidade na Grelha</span>
+      </div>
+      <div class="grelha-grid">
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Assado de Tira</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Costela</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Ancho</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Filé de Sol</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Denver Steak</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Sobrecoxa Desossada</span>
+          <span class="grelha-item-preco">58</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Flat Iron</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">T-Bone de Cordeiro</span>
+          <span class="grelha-item-preco">68</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Picanha</span>
+          <span class="grelha-item-preco">98</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Filé de Dourado</span>
+          <span class="grelha-item-preco">70</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Fraldinha</span>
+          <span class="grelha-item-preco">58</span>
+        </div>
+        <div class="grelha-item">
+          <span class="grelha-item-nome">Prime Ribe Suíno</span>
+          <span class="grelha-item-preco">58</span>
+        </div>
+      </div>
+      <p class="grelha-nota">Aproximadamente 300g • Servidas com porção de salada e mandioca chips</p>
+    </div>
+
+    <!-- ACOMPANHAMENTOS -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">Acompanhamentos</span>
+      </div>
+      <div class="acomp-grid">
+        <div class="acomp-item"><span class="acomp-nome">Arroz Biro Biro</span><span class="acomp-preco">22</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Purê de Batatas</span><span class="acomp-preco">18</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Arroz Branco</span><span class="acomp-preco">15</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Purê de Mandioca</span><span class="acomp-preco">18</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Arroz Carreteiro</span><span class="acomp-preco">25</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Brócolis no Alho</span><span class="acomp-preco">15</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Batata Frita</span><span class="acomp-preco">15</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Cebola na Manteiga</span><span class="acomp-preco">15</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Feijão Tropeiro</span><span class="acomp-preco">25</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Maionese</span><span class="acomp-preco">15</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Farofa de Ovo</span><span class="acomp-preco">18</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Legumes Grelhados</span><span class="acomp-preco">18</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Farofa Panko e Bacon</span><span class="acomp-preco">22</span></div>
+        <div class="acomp-item"><span class="acomp-nome">Vinagrete</span><span class="acomp-preco">15</span></div>
+      </div>
+      <div class="acomp-nota">Pergunte ao garçom qual o especial do dia</div>
+    </div>
+
+    <!-- PRATO KIDS -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">Prato Kids</span>
+      </div>
+      <div class="kids-grid">
+        <div class="kids-item">
+          <span class="kids-nome">Arroz, feijão, filé mignon e fritas</span>
+          <span class="kids-preco">39</span>
+        </div>
+        <div class="kids-item">
+          <span class="kids-nome">Arroz, feijão e óleo com filé de frango</span>
+          <span class="kids-preco">39</span>
+        </div>
+        <div class="kids-item">
+          <span class="kids-nome">Strogonoff, arroz e batata palha</span>
+          <span class="kids-preco">39</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAMBÚRGUERES / SANDUBAS -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">Hambúrgueres / Sandubas</span>
+      </div>
+      <div class="items-grid hamburguer-grid">
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Sanduba de Pastrami</span>
+            <span class="item-preco">35</span>
+            <p class="item-desc">Pastrami, mostarda Heinz, picles de pepino no pão ciabata.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Sanduba Costela Burger</span>
+            <span class="item-preco">40</span>
+            <p class="item-desc">Hambúrguer 180g de costela + 180g de costela assada, desfiada, rúcula e cebola roxa. No pão brioche.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Brioche Cheddar</span>
+            <span class="item-preco">35</span>
+            <p class="item-desc">Carne moída Angus, frita com cebola e um delicioso molho cheddar no pão de forma brioche.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Choripan</span>
+            <span class="item-preco">35</span>
+            <p class="item-desc">Linguiça especial da casa, molho chimichurri artesanal, muita mussarela no pão francês.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Frango Picante</span>
+            <span class="item-preco">35</span>
+            <p class="item-desc">Sobrecoxa de frango empanada, mergulhada no molho picante, bacon caramelizado, alface, tomate e molho americano.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+        <div class="item-card">
+          <div class="item-header">
+            <span class="item-nome">Sanduba Flat Iron</span>
+            <span class="item-preco">40</span>
+            <p class="item-desc">Tiras de Flat Iron Angus, macarreira chips, rúcula e creme de gorgonzola, servido no pão francês.</p>
+          </div>
+          <img class="itens-img" src="mini-almondegas.png" alt="">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SOBREMESAS -->
+    <div class="section-block">
+      <div class="section-header">
+        <span class="section-title">Sobremesas</span>
+      </div>
+      <div class="sobremesas-grid">
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Banoffee</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Abacaxi Assado com Canela e Açúcar</span>
+            <span class="sobremesa-preco">20</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Mousse de Chocolate</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Panqueca de Doce de Leite com Sorvete de Creme</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Brownie com Sorvete de Creme</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Pudim de Parmesão com Calda de Frutas Vermelhas</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+        <div class="sobremesa-item">
+          <div class="sobremesa-header">
+            <span class="sobremesa-nome">Creme de Papaya com Cassis</span>
+            <span class="sobremesa-preco">25</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOLINHOS -->
+    <div class="bolinhos-wrapper">
+      <div class="bolinhos-title-block">
+        <div class="bolinhos-nome">Bolinhos</div>
+        <div class="bolinhos-qtd">6 unidades por porção</div>
+      </div>
+      <div class="bolinhos-grid">
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Costelinha Barbecue</div>
+            <div class="bolinho-tipo">Suína</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Costela</div>
+            <div class="bolinho-tipo">Bovina</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Carne Seca</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Frango com Catupiry</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Ossobuco</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Queijo</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item">
+          <div>
+            <div class="bolinho-nome">Risoto de Funghi</div>
+          </div>
+          <span class="bolinho-preco">55</span>
+        </div>
+        <div class="bolinho-item bolinho-destaque">
+          <div>
+            <div class="bolinho-nome">Mix de Todos</div>
+            <div class="bolinho-tipo">Um bolinho de cada sabor — 7 unidades</div>
+          </div>
+          <span class="bolinho-preco">79</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Floresta</div>
+    <div class="footer-taxa">✦ Cobramos 10% de taxa de serviço ✦</div>
+  </div>
+
+</body>
+
+</html>
