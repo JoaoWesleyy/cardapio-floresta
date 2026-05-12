@@ -143,7 +143,8 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
-      height: 290px;
+      height: auto;
+      min-height: 290px;
       background: var(--branco);
       padding: 22px 24px;
       transition: background .2s;
@@ -582,6 +583,240 @@
       text-transform: uppercase;
     }
 
+    /* ── OVERLAY ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 25, 16, 0.55);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 200;
+      transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── NAV LATERAL ── */
+    .sidenav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100vh;
+      background: var(--verde-escuro);
+      z-index: 300;
+      transform: translateX(-100%);
+      transition: transform 0.45s cubic-bezier(.77, 0, .18, 1);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .sidenav.open {
+      transform: translateX(0);
+    }
+
+    .sidenav-header {
+      padding: 36px 28px 20px;
+      border-bottom: 1px solid rgba(201, 168, 76, .25);
+    }
+
+    .sidenav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      letter-spacing: 5px;
+      color: var(--branco);
+      text-transform: uppercase;
+    }
+
+    .sidenav-sub {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--dourado);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .sidenav-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dourado);
+      font-size: 22px;
+      padding: 4px;
+      transition: transform 0.25s;
+    }
+
+    .sidenav-close:hover {
+      transform: rotate(90deg);
+    }
+
+    .sidenav-nav {
+      padding: 20px 0;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 28px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.25s;
+    }
+
+    .nav-item:hover {
+      background: rgba(201, 168, 76, 0.06);
+    }
+
+    .nav-item.active {
+      border-left-color: var(--dourado);
+    }
+
+    .nav-item.active .nav-label {
+      color: var(--dourado-claro);
+    }
+
+    .nav-icon {
+      font-size: 18px;
+      width: 22px;
+      text-align: center;
+    }
+
+    .nav-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .nav-item:hover .nav-label {
+      color: var(--branco);
+    }
+
+    .sidenav-footer {
+      padding: 20px 28px;
+      border-top: 1px solid rgba(201, 168, 76, .15);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(201, 168, 76, .5);
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .hamburger-btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 400;
+      width: 44px;
+      height: 44px;
+      background: var(--verde-escuro);
+      border: 1px solid rgba(201, 168, 76, .4);
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .hamburger-btn:hover {
+      background: var(--verde-medio);
+      border-color: var(--dourado);
+    }
+
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--dourado);
+      transition: transform 0.35s cubic-bezier(.77, 0, .18, 1), opacity 0.25s;
+      transform-origin: center;
+    }
+
+    .hamburger-btn.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .hamburger-btn.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger-btn.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--dourado), var(--dourado-claro));
+      z-index: 500;
+      width: 0%;
+      transition: width .1s linear;
+    }
+
+    /* ── BACK TO TOP ── */
+    .back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: var(--verde-escuro);
+      border: 1px solid rgba(201, 168, 76, .5);
+      color: var(--dourado);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .35s, transform .35s, background .2s;
+      border-radius: 2px;
+    }
+
+    .back-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      background: var(--verde-medio);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(.4, 0, .2, 1), transform 0.6s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 600px) {
       .logo-floresta {
         width: 220px;
@@ -607,14 +842,37 @@
 </head>
 
 <body>
+  <div class="progress-bar" id="progressBar"></div>
+  <button class="hamburger-btn" id="hamburgerBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="overlay" id="overlay"></div>
+  <nav class="sidenav" id="sidenav">
+    <button class="sidenav-close" id="navClose">✕</button>
+    <div class="sidenav-header">
+      <div class="sidenav-logo">Floresta</div>
+      <div class="sidenav-sub">Restaurante — Cardápio</div>
+    </div>
+    <div class="sidenav-nav">
+      <div class="nav-item" data-target="entradas"><span class="nav-icon"></span><span class="nav-label">Entradas &amp; Porções</span></div>
+      <div class="nav-item" data-target="grelha"><span class="nav-icon"></span><span class="nav-label">Especialidade na Grelha</span></div>
+      <div class="nav-item" data-target="acompanhamentos"><span class="nav-icon"></span><span class="nav-label">Acompanhamentos</span></div>
+      <div class="nav-item" data-target="kids"><span class="nav-icon"></span><span class="nav-label">Prato Kids</span></div>
+      <div class="nav-item" data-target="hamburgueres"><span class="nav-icon"></span><span class="nav-label">Hambúrgueres</span></div>
+      <div class="nav-item" data-target="sobremesas"><span class="nav-icon"></span><span class="nav-label">Sobremesas</span></div>
+      <div class="nav-item" data-target="bolinhos"><span class="nav-icon"></span><span class="nav-label">Bolinhos</span></div>
+    </div>
+    <div class="sidenav-footer">✦ 10% taxa de serviço ✦</div>
+  </nav>
+  <button class="back-top" id="backTop">↑</button>
   <div class="header">
     <img class="logo-floresta" src="logo-floresta.png" alt="">
     <div class="header-linha"><span class="header-diamond">◆</span></div>
   </div>
   <div class="taxa-bar">Cobramos couvert artistico</div>
   <div class="container">
-    <div class="section-block">
-      <div class="section-header">
+    <div class="section-block" id="entradas">
+      <div class=" section-header">
         <span class="section-title">Entradas e Porções</span>
       </div>
       <div class="items-grid">
@@ -726,8 +984,8 @@
         </div>
       </div>
     </div>
-    <div class="grelha-box">
-      <div class="grelha-header">
+    <div class="grelha-box" id="grelha">
+      <div class=" grelha-header">
         <span class="grelha-title">Especialidade na Grelha</span>
       </div>
       <div class="grelha-grid">
@@ -782,7 +1040,7 @@
       </div>
       <p class="grelha-nota">Aproximadamente 300g • Servidas com porção de salada e mandioca chips</p>
     </div>
-    <div class="section-block">
+    <div class="section-block" id="acompanhamentos">
       <div class="section-header">
         <span class="section-title">Acompanhamentos</span>
       </div>
@@ -804,7 +1062,7 @@
       </div>
       <div class="acomp-nota">Pergunte ao garçom qual o especial do dia</div>
     </div>
-    <div class="section-block">
+    <div class="section-block" id="kids">
       <div class="section-header">
         <span class="section-title">Prato Kids</span>
       </div>
@@ -823,7 +1081,7 @@
         </div>
       </div>
     </div>
-    <div class="section-block">
+    <div class="section-block" id="hamburgueres">
       <div class="section-header">
         <span class="section-title">Hambúrgueres</span>
       </div>
@@ -878,7 +1136,7 @@
         </div>
       </div>
     </div>
-    <div class="section-block">
+    <div class="section-block" id="sobremesas">
       <div class="section-header">
         <span class="section-title">Sobremesas</span>
       </div>
@@ -927,7 +1185,7 @@
         </div>
       </div>
     </div>
-    <div class="bolinhos-wrapper">
+    <div class="bolinhos-wrapper" id="bolinhos">
       <div class="bolinhos-title-block">
         <div class="bolinhos-nome">Bolinhos</div>
         <div class="bolinhos-qtd">6 unidades por porção</div>
@@ -991,6 +1249,80 @@
     <div class="footer-logo">Floresta</div>
     <div class="footer-taxa">✦ Cobramos 10% de taxa de serviço ✦</div>
   </div>
+  <script>
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('sidenav');
+    const overlay = document.getElementById('overlay');
+    const navClose = document.getElementById('navClose');
+
+    function openNav() {
+      nav.classList.add('open');
+      btn.classList.add('open');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      nav.classList.remove('open');
+      btn.classList.remove('open');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', () => nav.classList.contains('open') ? closeNav() : openNav());
+    navClose.addEventListener('click', closeNav);
+    overlay.addEventListener('click', closeNav);
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const target = document.getElementById(item.dataset.target);
+        if (target) {
+          closeNav();
+          setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 380);
+        }
+      });
+    });
+
+    const sections = ['entradas', 'grelha', 'acompanhamentos', 'kids', 'hamburgueres', 'sobremesas', 'bolinhos'];
+    const navItems = document.querySelectorAll('.nav-item');
+
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) current = id;
+      });
+      navItems.forEach(item => item.classList.toggle('active', item.dataset.target === current));
+    }
+
+    const progressBar = document.getElementById('progressBar');
+    const backTop = document.getElementById('backTop');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+      backTop.classList.toggle('show', scrollTop > 400);
+      updateActiveNav();
+    }, { passive: true });
+
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) el.classList.add('visible');
+      }, { threshold: 0.08 }).observe(el);
+    });
+
+    document.querySelectorAll('.item-card, .grelha-item, .acomp-item, .bolinho-item').forEach((card, i) => {
+      card.style.cssText += `opacity:0;transform:translateY(16px);transition:opacity .5s ease ${(i % 8) * 60}ms,transform .5s ease ${(i % 8) * 60}ms`;
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }
+      }, { threshold: 0.05 }).observe(card);
+    });
+  </script>
 </body>
 
 </html>
